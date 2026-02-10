@@ -1,0 +1,6 @@
+# Minimal dependencies for test server only
+# Install with: pip install -r requirements-test.txt
+
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
