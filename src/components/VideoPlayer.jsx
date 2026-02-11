@@ -18,17 +18,41 @@ function VideoPlayer({
 
   return (
     <div className="card">
-      <div className="flex items-center gap-3 mb-4">
+      <div className="mb-4">
         <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Video Playback</h2>
       </div>
       
-      <div className="bg-black rounded-lg overflow-hidden mb-4 border border-gray-200">
+      <div 
+        className="bg-black rounded-lg overflow-hidden mb-4 border border-gray-200 relative group"
+        style={{ 
+          resize: 'both', 
+          minWidth: '300px', 
+          minHeight: '200px',
+          maxWidth: '100%',
+          overflow: 'hidden'
+        }}
+      >
         <video
           ref={videoRef}
           src={videoUrl}
-          className="w-full aspect-video"
+          className="w-full h-full object-contain"
+          style={{ 
+            display: 'block',
+            width: '100%',
+            height: '100%',
+            minHeight: '200px'
+          }}
           playsInline
+          controls
         />
+        {/* Resize handle indicator */}
+        <div 
+          className="absolute bottom-0 right-0 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity cursor-nwse-resize pointer-events-none"
+          style={{
+            background: 'linear-gradient(-45deg, transparent 0%, transparent 30%, rgba(255,255,255,0.3) 30%, rgba(255,255,255,0.3) 40%, transparent 40%)'
+          }}
+        >
+        </div>
       </div>
       
       {/* Custom Video Controls */}

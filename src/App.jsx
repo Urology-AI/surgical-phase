@@ -7,6 +7,7 @@ import VideoUpload from './components/VideoUpload'
 import VideoPlayer from './components/VideoPlayer'
 import ResultsPanel from './components/ResultsPanel'
 import ErrorDisplay from './components/ErrorDisplay'
+import SideBySideFullscreen from './components/SideBySideFullscreen'
 import { useBackend } from './hooks/useBackend'
 import { useVideoProcessing } from './hooks/useVideoProcessing'
 
@@ -17,6 +18,7 @@ function App() {
   )
   const [videoFile, setVideoFile] = useState(null)
   const [videoUrl, setVideoUrl] = useState('')
+  const [showSideBySideFullscreen, setShowSideBySideFullscreen] = useState(false)
   
   const {
     isConnected,
@@ -123,6 +125,7 @@ function App() {
                 isProcessing={isProcessing}
                 framesPerPrediction={framesPerPrediction}
                 status={status}
+                onShowSideBySideFullscreen={() => setShowSideBySideFullscreen(true)}
               />
             </div>
           )}
@@ -134,6 +137,26 @@ function App() {
       
       {/* Hidden canvas for frame capture */}
       <canvas ref={canvasRef} style={{ display: 'none' }} />
+      
+      {/* Side by Side Fullscreen */}
+      {showSideBySideFullscreen && videoUrl && (
+        <SideBySideFullscreen
+          videoUrl={videoUrl}
+          videoRef={videoRef}
+          seekBarRef={seekBarRef}
+          isPlaying={isPlaying}
+          currentTime={currentTime}
+          duration={duration}
+          onTogglePlayPause={togglePlayPause}
+          onSeekStart={handleSeekStart}
+          onSeekMove={handleSeekMove}
+          onSeekEnd={handleSeekEnd}
+          formatTime={formatTime}
+          currentPhase={currentPhase}
+          isProcessing={isProcessing}
+          onClose={() => setShowSideBySideFullscreen(false)}
+        />
+      )}
     </div>
   )
 }

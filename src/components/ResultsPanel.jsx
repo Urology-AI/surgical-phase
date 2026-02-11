@@ -1,5 +1,5 @@
 import React from 'react'
-import { Activity, Film, Loader2, Clock, BarChart3 } from 'lucide-react'
+import { Activity, Film, Loader2, Clock, BarChart3, Maximize2 } from 'lucide-react'
 
 function ResultsPanel({
   currentPhase,
@@ -8,16 +8,27 @@ function ResultsPanel({
   isProcessing,
   framesPerPrediction,
   status,
+  onShowSideBySideFullscreen,
 }) {
   return (
     <div className="space-y-4">
       {/* Current Phase Display */}
       <div className="card border-l-4 border-l-[#212070]">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-[#212070]/10 rounded-lg">
-            <Activity className="w-5 h-5 text-[#212070]" />
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-[#212070]/10 rounded-lg">
+              <Activity className="w-5 h-5 text-[#212070]" />
+            </div>
+            <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Current Surgical Phase</h2>
           </div>
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Current Surgical Phase</h2>
+          <button
+            onClick={onShowSideBySideFullscreen}
+            className="p-2 text-gray-600 hover:text-[#212070] hover:bg-gray-100 rounded-lg transition-colors"
+            aria-label="Show video and phase side by side"
+            title="Side by side fullscreen"
+          >
+            <Maximize2 className="w-4 h-4" />
+          </button>
         </div>
         
         <div className="py-6">
